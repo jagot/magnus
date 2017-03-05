@@ -1,0 +1,19 @@
+#+TITLE: Magnus propagators
+#+AUTHOR: Stefanos Carlström
+#+EMAIL: stefanos.carlstrom@gmail.com
+
+* Introduction
+  An implementation of Magnus propagators for the solution of partial
+  differential equations of the type y' = Ay.
+
+* Road map
+  - Integrators:
+    - Midpoint (trapezoidal)
+    - CFET4
+      Alvermann, A., Fehske, H., & Littlewood, P. B. (2012). Numerical
+      time propagation of quantum systems in radiation fields. New Journal
+      of Physics, 14(10), 105008. http://dx.doi.org/10.1088/1367-2630/14/10/105008
+  - Exponentiators:
+    - Hermitian Lanczos
+  - Subspace exponential
+    - Tridiagonal LU factorization

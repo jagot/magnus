@@ -1,0 +1,3 @@
+[submodule "cxxblas"]
+	path = cxxblas
+	url = https://github.com/jagot/cxxblas.git

@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\begin{document}
+Hermitian Lanczos approximation of matrix exponential:
+\[e^{\mu A}v\approx\beta V_m
+  \underbrace{e^{\mu H_m}\vec{e}_1}_{\tilde{w}_m}\]
+Chebyshev approximation of subspace matrix exponential:
+\[e^{\mu H_m}=J_0(i)I_m +
+  2\sum_{k=1}^\infty i^k J_k(-i) T_k(\mu H_m),\]
+where
+\[T_0(x) = 1,\quad
+  T_1(x) = x,\quad
+  T_{k+1}(x)=2xT_k(x)-T_{k-1}(x).\]
+
+\[E^{(K)}\equiv
+  2\sum_{k=1}^K i^k J_k(-i) T_k(\mu H_m)\]
+
+\[\tilde{w}_m^{(K)} =
+  \left[
+    J_0(i)I_m +
+    E^{(K)}
+  \right]\vec{e}_1=
+  \begin{bmatrix}
+    J_0(i)\\
+    0\\
+    \vdots\\
+    0
+  \end{bmatrix} +
+  2\sum_{k=1}^{K} i^kJ_k(-1)
+  T_k(\mu H_m)\vec{e}_1
+\]
+\end{document}
