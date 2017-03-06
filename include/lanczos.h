@@ -38,7 +38,7 @@ namespace magnus {
 
     void operator()(std::function<void(T*, T*)> A,
                     T mu,
-                    T* v, T* w,
+                    T* w, T* v,
                     bool verbose = false)
     {
       exp_lanczos(n, A, v, mu, m, w,

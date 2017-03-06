@@ -23,7 +23,7 @@ namespace magnus {
 
     virtual void operator()(std::function<void(T*, T*)> A,
                             T mu,
-                            T* v, T* w,
+                            T* w, T* v,
                             bool verbose = false) = 0;
 
     const std::size_t m, n;
