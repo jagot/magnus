@@ -5,14 +5,15 @@
 #include <iostream>
 
 namespace magnus {
-  template<class T, class R>
+  template<class T>
   void exp_lanczos(std::size_t n,
-                   std::function<void(T*, T*)> A,
-                   T* v,
+                   const A<T>& A,
+                   const T* v,
                    T mu, std::size_t m,
                    T* w, T* V, T* wtilde,
                    T* Hm, T* Tk, T* Tkm,
-                   R atol, R rtol,
+                   typename Real<T>::type atol,
+                   typename Real<T>::type rtol,
                    std::size_t kmax,
                    bool verbose)
   {
@@ -34,7 +35,7 @@ namespace magnus {
     T *x = V, *y = V + n;
     std::size_t jj = 1; // Which Krylov subspace to use in the end
 
-    R a, b, bp;
+    typename Real<T>::type a, b, bp;
 
     T* Hmm_p = Hm;
 
@@ -79,19 +80,20 @@ namespace magnus {
                   0, w, 1);
   }
 
-#define EXP_LANCZOS(T,R)                                \
-  template                                              \
-  void exp_lanczos<T>(std::size_t n,                    \
-                      std::function<void(T*, T*)> A,    \
-                      T* v,                             \
-                      T mu, std::size_t m,              \
-                      T* w, T* V, T* wtilde,            \
-                      T* Hm, T* Tk, T* Tkm,             \
-                      R atol, R rtol,                   \
-                      std::size_t kmax,                 \
+#define EXP_LANCZOS(T)                                                  \
+  template                                                              \
+  void exp_lanczos<T>(std::size_t n,                                    \
+                      const A<T>& A,                                    \
+                      const T* v,                                       \
+                      T mu, std::size_t m,                              \
+                      T* w, T* V, T* wtilde,                            \
+                      T* Hm, T* Tk, T* Tkm,                             \
+                      typename Real<T>::type atol,                      \
+                      typename Real<T>::type rtol,                      \
+                      std::size_t kmax,                                 \
                       bool verbose);
-  EXP_LANCZOS(float, float);
-  EXP_LANCZOS(double, double);
-  EXP_LANCZOS(std::complex<float>, float);
-  EXP_LANCZOS(std::complex<double>, double);
+  EXP_LANCZOS(float);
+  EXP_LANCZOS(double);
+  EXP_LANCZOS(std::complex<float>);
+  EXP_LANCZOS(std::complex<double>);
 } // magnus

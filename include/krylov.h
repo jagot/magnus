@@ -11,7 +11,7 @@
 #include "exp.h"
 #include <cstddef>
 #include <vector>
-#include <functional>
+#include "operator.h"
 
 namespace magnus {
   template<class T>
@@ -21,9 +21,9 @@ namespace magnus {
       : m(m), n(n), Vm((m+1)*n) {}
     virtual ~Krylov(){}
 
-    virtual void operator()(std::function<void(T*, T*)> A,
+    virtual void operator()(const A<T>& A,
                             T mu,
-                            T* w, T* v,
+                            T* w, const T* v,
                             bool verbose = false) = 0;
 
     const std::size_t m, n;

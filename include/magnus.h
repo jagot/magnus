@@ -18,7 +18,7 @@ namespace magnus {
   public:
     Magnus(std::size_t n,
            std::shared_ptr<Exp<T>> exp)
-      : n(n), exp(std::move(exp)){}
+      : n(n), exp(exp){}
     virtual ~Magnus(){}
 
     std::size_t n;
@@ -27,5 +27,6 @@ namespace magnus {
 }
 
 #include "lanczos.h"
+#include "midpoint.h"
 
 #endif //MAGNUS_H

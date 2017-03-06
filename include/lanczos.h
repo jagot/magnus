@@ -11,23 +11,24 @@
 #include "krylov.h"
 
 namespace magnus {
-  template<class T, class R>
+  template<class T>
   void exp_lanczos(std::size_t n,
-                   std::function<void(T*, T*)> A,
-                   T* v,
+                   const A<T>& A,
+                   const T* v,
                    T mu, std::size_t m,
                    T* w, T* V, T* wtilde,
                    T* Hm, T* Tk, T* Tkm,
-                   R atol, R rtol,
+                   typename Real<T>::type atol,
+                   typename Real<T>::type rtol,
                    std::size_t kmax,
                    bool verbose);
   
-  template<class T, class R>
+  template<class T>
   class Lanczos : public Krylov<T> {
   public:
     Lanczos(std::size_t m, std::size_t n,
-            R atol = R(1e-8),
-            R rtol = R(1e-4),
+            typename Real<T>::type atol = typename Real<T>::type(1e-8),
+            typename Real<T>::type rtol = typename Real<T>::type(1e-4),
             std::size_t kmax=14)
       : Krylov<T>(m, n),
       Hm(m*m, T(0)), wtilde(m),
@@ -36,9 +37,9 @@ namespace magnus {
       kmax(kmax)
     {}
 
-    void operator()(std::function<void(T*, T*)> A,
+    void operator()(const A<T>& A,
                     T mu,
-                    T* w, T* v,
+                    T* w, const T* v,
                     bool verbose = false)
     {
       exp_lanczos(n, A, v, mu, m, w,
@@ -51,7 +52,7 @@ namespace magnus {
     std::vector<T> Hm, // Subspace Hamiltonian
       wtilde, // Subspace vector
       Tk, Tkm; // Chebyshev polynomials, for subspace matrix exponential
-    R atol, rtol; // Relative and absolute tolerances
+    typename Real<T>::type atol, rtol; // Relative and absolute tolerances
     std::size_t kmax;
     using Krylov<T>::m;
     using Krylov<T>::n;
