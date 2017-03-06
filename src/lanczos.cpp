@@ -13,6 +13,7 @@ namespace magnus {
                    T* w, T* V, T* wtilde,
                    T* Hm, T* Tk, T* Tkm,
                    R atol, R rtol,
+                   std::size_t kmax,
                    bool verbose)
   {
     if(verbose) std::cout << "Lanczos" << std::endl;
@@ -51,7 +52,7 @@ namespace magnus {
       b = cxxblas::norm2(n, y, 1);
       cxxblas::scale(n, T(1)/b, y, 1);
 
-      cheb_tri_exp(j+1, m, Hm, Tk, Tkm, mu, wtilde);
+      cheb_tri_exp(j+1, m, Hm, Tk, Tkm, mu, wtilde, kmax);
 
       auto sigma = b*std::abs(wtilde[j]);
 
@@ -87,6 +88,7 @@ namespace magnus {
                       T* w, T* V, T* wtilde,            \
                       T* Hm, T* Tk, T* Tkm,             \
                       R atol, R rtol,                   \
+                      std::size_t kmax,                 \
                       bool verbose);
   EXP_LANCZOS(float, float);
   EXP_LANCZOS(double, double);

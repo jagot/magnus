@@ -19,6 +19,7 @@ namespace magnus {
                    T* w, T* V, T* wtilde,
                    T* Hm, T* Tk, T* Tkm,
                    R atol, R rtol,
+                   std::size_t kmax,
                    bool verbose);
   
   template<class T, class R>
@@ -26,11 +27,13 @@ namespace magnus {
   public:
     Lanczos(std::size_t m, std::size_t n,
             R atol = R(1e-8),
-            R rtol = R(1e-4))
+            R rtol = R(1e-4),
+            std::size_t kmax=14)
       : Krylov<T>(m, n),
       Hm(m*m, T(0)), wtilde(m),
       Tk(m*m), Tkm(m*m),
-      atol(atol), rtol(rtol)
+      atol(atol), rtol(rtol),
+      kmax(kmax)
     {}
 
     void operator()(std::function<void(T*, T*)> A,
@@ -41,13 +44,15 @@ namespace magnus {
       exp_lanczos(n, A, v, mu, m, w,
                   &Vm[0], &wtilde[0],
                   &Hm[0], &Tk[0], &Tkm[0],
-                  atol, rtol, verbose);
+                  atol, rtol, kmax,
+                  verbose);
     }
 
     std::vector<T> Hm, // Subspace Hamiltonian
       wtilde, // Subspace vector
       Tk, Tkm; // Chebyshev polynomials, for subspace matrix exponential
     R atol, rtol; // Relative and absolute tolerances
+    std::size_t kmax;
     using Krylov<T>::m;
     using Krylov<T>::n;
     using Krylov<T>::Vm;
