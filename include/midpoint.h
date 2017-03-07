@@ -28,6 +28,16 @@ namespace magnus {
              mu, y, x);
     }
 
+    void operator()(int i,
+                    const BftC<T>& A, T mu,
+                    T* y, const T* x)
+    {
+      T f = A.f(i+0.5);
+      (*exp)([&](T* y, T* x)
+             { A.A(f, y, x); },
+             mu, y, x);
+    }
+
     using Magnus<T>::exp;
   };
 } // magnus

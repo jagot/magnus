@@ -40,6 +40,13 @@ namespace magnus {
   template<class T>
   using At = typename Op<T>::OpFunc;
 
+  // Operators with time dependence
+  // A(t) = B + f(t)C
+  template<class T>
+  struct BftC {
+    std::function<T(typename Real<T>::type)> f;
+    std::function<void(T,T*,T*)> A;
+  };
 }  // magnus
 
 #endif //OPERATOR_H
