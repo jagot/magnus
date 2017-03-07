@@ -21,7 +21,7 @@ namespace magnus {
 
     void operator()(int i,
                     const At<T>& A, T mu,
-                    T* y, const T* x)
+                    T* y, T* x)
     {
       (*exp)([&](T* y, T* x)
              { A(i+0.5, y, x); },
@@ -30,7 +30,7 @@ namespace magnus {
 
     void operator()(int i,
                     const BftC<T>& A, T mu,
-                    T* y, const T* x)
+                    T* y, T* x)
     {
       T f = A.f(i+0.5);
       (*exp)([&](T* y, T* x)

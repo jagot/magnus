@@ -8,12 +8,14 @@
 
 * Road map
   - Integrators:
-    - Midpoint (trapezoidal)
-    - CFET4
+    - [X] Midpoint (trapezoidal)
+    - [-] CFET4
       Alvermann, A., Fehske, H., & Littlewood, P. B. (2012). Numerical
       time propagation of quantum systems in radiation fields. New Journal
-      of Physics, 14(10), 105008. http://dx.doi.org/10.1088/1367-2630/14/10/105008
-  - Exponentiators:
-    - Hermitian Lanczos
+      of Physics, 14(10), 105008. DOI: [[http://dx.doi.org/10.1088/1367-2630/14/10/105008][10.1088/1367-2630/14/10/105008]]
+  - [-] Exponentiators:
+    - [X] Hermitian Lanczos
+    - [ ] Arnoldi
   - Subspace exponential
-    - Tridiagonal LU factorization
+    - [ ] Tridiagonal LU factorization
+    - [X] Chebyshev

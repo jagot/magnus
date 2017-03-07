@@ -11,6 +11,7 @@
 #include "exp.h"
 #include <cstddef>
 #include <memory>
+#include "operator.h"
 
 namespace magnus {
   template<class T>
@@ -23,10 +24,20 @@ namespace magnus {
 
     std::size_t n;
     std::shared_ptr<Exp<T>> exp;
+
+    virtual void operator()(int i,
+                            const At<T>& A, T mu,
+                            T* y, T* x) = 0;
+
+
+    virtual void operator()(int i,
+                            const BftC<T>& A, T mu,
+                            T* y, T* x) = 0;
   };
 }
 
 #include "lanczos.h"
 #include "midpoint.h"
+#include "cfet4.h"
 
 #endif //MAGNUS_H
